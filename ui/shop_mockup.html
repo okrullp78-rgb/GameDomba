@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GameDomba — Mockup Toko</title>
+  <link rel="stylesheet" href="shop_style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>GameDomba</h1>
+      <div class="hud">
+        <div class="credit">Credits: <span id="credits">100</span></div>
+        <button id="vipBtn">VIP</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="shop" class="screen active">
+        <h2>Toko</h2>
+        <div class="shop-grid" id="items">
+          <!-- items injected by JS -->
+        </div>
+      </section>
+
+      <section id="itemDetail" class="screen">
+        <button id="backBtn">← Kembali</button>
+        <div class="detail">
+          <h3 id="detailName">Nama Item</h3>
+          <p id="detailDesc">Deskripsi singkat item.</p>
+          <div class="detail-actions">
+            <div class="price">Harga: <span id="detailPrice">50</span> Credits</div>
+            <button id="buyBtn">Beli</button>
+            <button id="watchAdBtn">Tonton iklan (dapat 1 basic food)</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="toast" class="toast"></div>
+    </main>
+
+    <footer>
+      <nav>
+        <button data-screen="shop">Toko</button>
+        <button data-screen="stable">Kandang</button>
+        <button data-screen="compete">Adu</button>
+      </nav>
+    </footer>
+  </div>
+
+  <script>
+    // Mock data
+    const items = [
+      {id:1, name:'Pakan Biasa', desc:'+15 Stamina', price:1, type:'consumable'},
+      {id:2, name:'Pakan Premium', desc:'+35 Stamina +5 XP', price:20, type:'consumable'},
+      {id:3, name:'Tanduk Hias', desc:'Kosmetik', price:120, type:'cosmetic'},
+      {id:4, name:'Tiket Turnamen', desc:'Buka entry turnamen', price:20, type:'ticket'}
+    ];
+
+    let credits = 100;
+    const creditsEl = document.getElementById('credits');
+    const itemsEl = document.getElementById('items');
+    const screens = document.querySelectorAll('.screen');
+
+    function showToast(txt){
+      const t = document.getElementById('toast');
+      t.textContent = txt; t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),2000);
+    }
+
+    function renderShop(){
+      itemsEl.innerHTML = '';
+      items.forEach(it=>{
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h4>${it.name}</h4><p>${it.desc}</p><div class="card-foot">${it.price} CR <button data-id="${it.id}">Detail</button></div>`;
+        itemsEl.appendChild(card);
+      });
+      itemsEl.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.id)));
+    }
+
+    function openDetail(id){
+      const it = items.find(x=>x.id==id);
+      document.getElementById('detailName').textContent = it.name;
+      document.getElementById('detailDesc').textContent = it.desc;
+      document.getElementById('detailPrice').textContent = it.price;
+      document.getElementById('buyBtn').dataset.id = it.id;
+      switchScreen('itemDetail');
+    }
+
+    function switchScreen(name){
+      screens.forEach(s=>s.classList.remove('active'));
+      document.getElementById(name).classList.add('active');
+    }
+
+    document.getElementById('buyBtn').addEventListener('click', (e)=>{
+      const id = e.target.dataset.id;
+      const it = items.find(x=>x.id==id);
+      if(credits >= it.price){
+        credits -= it.price;
+        creditsEl.textContent = credits;
+        showToast('Berhasil membeli '+it.name);
+      } else showToast('Credits tidak cukup');
+    });
+
+    document.getElementById('watchAdBtn').addEventListener('click', ()=>{
+      // placeholder for rewarded ad
+      showToast('Iklan tonton selesai — dapat 1 Pakan Biasa');
+    });
+
+    document.getElementById('backBtn').addEventListener('click', ()=>switchScreen('shop'));
+    document.querySelectorAll('footer nav button').forEach(b=>b.addEventListener('click',()=>showToast('Navigasi: '+b.textContent)));
+
+    renderShop();
+    creditsEl.textContent = credits;
+  </script>
+</body>
+</html>

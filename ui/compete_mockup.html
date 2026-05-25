@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GameDomba — Adu</title>
+  <link rel="stylesheet" href="shop_style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Adu</h1>
+      <div class="hud"><div class="credit">Credits: <span id="credits">100</span></div></div>
+    </header>
+    <main>
+      <section class="screen active">
+        <h2>Pertandingan Cepat</h2>
+        <div class="card">
+          <p>Lawannya: Domba Lawan (Level 2)</p>
+          <p>Stat kamu — Strength: 12, Speed: 11</p>
+          <button id="fightBtn">Mulai Adu</button>
+        </div>
+        <div id="result" style="margin-top:12px"></div>
+      </section>
+    </main>
+    <footer>
+      <nav>
+        <a href="shop_mockup.html"><button>Toko</button></a>
+        <a href="stable_mockup.html"><button>Kandang</button></a>
+      </nav>
+    </footer>
+  </div>
+  <script>
+    function rand(){return Math.random()*10}
+    document.getElementById('fightBtn').addEventListener('click', ()=>{
+      const myScore = 12*0.6 + 11*0.4 + rand();
+      const oppScore = 10*0.6 + 9*0.4 + rand();
+      const win = myScore>=oppScore;
+      document.getElementById('result').textContent = win? 'Menang! +20 Credits':'Kalah. Coba latih lagi.';
+    });
+  </script>
+</body>
+</html>
