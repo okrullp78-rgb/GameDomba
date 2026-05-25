@@ -16,7 +16,7 @@
       <section class="screen active">
         <h2>SiBulu (Level 2)</h2>
         <div class="stable-grid">
-          <div class="card">
+          <div class="card status-card" id="sheepStatus">
             <h4>Status</h4>
             <p>Stamina: <span id="stamina">72</span></p>
             <p>Strength: <span id="strength">12</span></p>
@@ -40,9 +40,43 @@
   </div>
   <script>
     let stamina = 72;
-    document.getElementById('stamina').textContent = stamina;
-    document.getElementById('feedBtn').addEventListener('click', ()=>{stamina = Math.min(100, stamina+15); document.getElementById('stamina').textContent = stamina});
-    document.getElementById('trainBtn').addEventListener('click', ()=>{if(stamina>=10){stamina-=10; document.getElementById('stamina').textContent = stamina; alert('Latihan selesai: +XP & +Strength')}});
+    let strength = 12;
+    let speed = 11;
+    const statusCard = document.getElementById('sheepStatus');
+    const staminaEl = document.getElementById('stamina');
+    const strengthEl = document.getElementById('strength');
+    const speedEl = document.getElementById('speed');
+
+    function updateStats() {
+      staminaEl.textContent = stamina;
+      strengthEl.textContent = strength;
+      speedEl.textContent = speed;
+      statusCard.classList.add('pulse');
+      setTimeout(() => statusCard.classList.remove('pulse'), 400);
+    }
+
+    updateStats();
+
+    document.getElementById('feedBtn').addEventListener('click', () => {
+      stamina = Math.min(100, stamina + 15);
+      updateStats();
+    });
+
+    document.getElementById('trainBtn').addEventListener('click', () => {
+      if (stamina >= 10) {
+        stamina -= 10;
+        strength += 1;
+        speed += 0.5;
+        updateStats();
+        alert('Latihan selesai: +XP & +Strength');
+      }
+    });
+
+    document.getElementById('restBtn').addEventListener('click', () => {
+      stamina = Math.min(100, stamina + 12);
+      updateStats();
+      alert('Domba beristirahat, stamina pulih.');
+    });
   </script>
 </body>
 </html>
