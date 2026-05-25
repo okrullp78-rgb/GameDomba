@@ -15,12 +15,12 @@
     <main>
       <section class="screen active">
         <h2>Pertandingan Cepat</h2>
-        <div class="card">
+        <div class="card result-card" id="battleCard">
           <p>Lawannya: Domba Lawan (Level 2)</p>
           <p>Stat kamu — Strength: 12, Speed: 11</p>
           <button id="fightBtn">Mulai Adu</button>
         </div>
-        <div id="result" style="margin-top:12px"></div>
+        <div id="result" class="result-text" style="margin-top:16px"></div>
       </section>
     </main>
     <footer>
@@ -32,11 +32,24 @@
   </div>
   <script>
     function rand(){return Math.random()*10}
+    const battleCard = document.getElementById('battleCard');
+    const resultEl = document.getElementById('result');
+
     document.getElementById('fightBtn').addEventListener('click', ()=>{
       const myScore = 12*0.6 + 11*0.4 + rand();
       const oppScore = 10*0.6 + 9*0.4 + rand();
-      const win = myScore>=oppScore;
-      document.getElementById('result').textContent = win? 'Menang! +20 Credits':'Kalah. Coba latih lagi.';
+      const win = myScore >= oppScore;
+      if (win) {
+        battleCard.classList.remove('lose');
+        battleCard.classList.add('win');
+        resultEl.textContent = 'Menang! +20 Credits';
+      } else {
+        battleCard.classList.remove('win');
+        battleCard.classList.add('lose');
+        resultEl.textContent = 'Kalah. Coba latih lagi.';
+      }
+      resultEl.classList.add('pop');
+      setTimeout(() => resultEl.classList.remove('pop'), 500);
     });
   </script>
 </body>
