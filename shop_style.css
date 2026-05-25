@@ -9,6 +9,16 @@ header h1{margin:0;font-size:1.2rem;z-index:1}
 .hud{display:flex;gap:10px;align-items:center;z-index:1}
 .hud .credit{background:rgba(255,255,255,0.24);padding:8px 12px;border-radius:999px;font-weight:600;backdrop-filter:blur(10px);box-shadow:0 12px 28px rgba(255,255,255,0.6)}
 main{padding:20px}
+.sheep-scene{position:relative;height:140px;margin-bottom:18px;border-radius:22px;background:linear-gradient(180deg, #dbeefd, #f4f8ff);overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,0.9), 0 12px 30px rgba(15,39,85,0.08)}
+.sheep-scene::before{content:'';position:absolute;left:0;right:0;bottom:18px;height:60px;background:radial-gradient(circle at 50% 0, rgba(96,165,250,0.35), transparent 45%)}
+.sheep-scene .sheep{position:absolute;bottom:18px;left:-120px;width:120px;animation:walk 6s linear infinite}
+.sheep-scene .sheep img{width:100%;animation:bounce 1s ease-in-out infinite}
+.sheep-scene .cloud{position:absolute;top:16px;width:72px;height:32px;background:rgba(255,255,255,0.9);border-radius:999px;box-shadow:0 8px 18px rgba(15,39,85,0.08);animation:cloudmove 20s linear infinite}
+.sheep-scene .cloud:nth-child(1){left:12%;opacity:.95}
+.sheep-scene .cloud:nth-child(2){left:58%;top:8px;width:90px;height:38px;animation-duration:24s;opacity:.82}
+@keyframes walk{0%{left:-120px}70%{left:110%}100%{left:110%}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes cloudmove{0%{transform:translateX(0)}100%{transform:translateX(-240px)}}
 .shop-hero{margin-bottom:18px;padding:18px 16px;background:linear-gradient(135deg, rgba(96,165,250,0.16), rgba(125,211,252,0.1));border-radius:18px;border:1px solid rgba(96,165,250,0.18);animation:fadeIn 0.6s ease forwards}
 .shop-hero h2{margin:0 0 6px;font-size:1.4rem}
 .shop-hero p{margin:0;color:#38517a;line-height:1.6}
