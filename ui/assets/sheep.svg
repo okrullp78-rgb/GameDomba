@@ -1,11 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="160" height="120" viewBox="0 0 160 120">
-  <g fill="none" fill-rule="evenodd">
-    <ellipse cx="80" cy="70" rx="50" ry="30" fill="#fff" stroke="#333"/>
-    <circle cx="60" cy="55" r="16" fill="#fff" stroke="#333"/>
-    <circle cx="100" cy="55" r="16" fill="#fff" stroke="#333"/>
-    <circle cx="60" cy="52" r="3" fill="#333"/>
-    <circle cx="100" cy="52" r="3" fill="#333"/>
-    <path d="M50 70c-6 8-4 20 8 26" stroke="#333" stroke-width="3" fill="none"/>
-    <path d="M110 70c6 8 4 20-8 26" stroke="#333" stroke-width="3" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="120" viewBox="0 0 180 120">
+  <defs>
+    <style>
+      .fur { fill:#f8fafc; stroke:#1f2937; stroke-width:3; }
+      .body { fill:#ffffff; stroke:#1f2937; stroke-width:4; }
+      .head { fill:#ffffff; stroke:#1f2937; stroke-width:4; }
+      .eye { fill:#1f2937; }
+      .ear { fill:#ffffff; stroke:#1f2937; stroke-width:3; }
+      .leg { fill:none; stroke:#1f2937; stroke-width:5; stroke-linecap:round; }
+      .tail { fill:#ffffff; stroke:#1f2937; stroke-width:3; }
+      .sheep-body, .sheep-fur, .sheep-head, .sheep-tail { animation: bob 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+      .leg1, .leg3 { animation: step1 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 45px 98px; }
+      .leg2, .leg4 { animation: step2 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 95px 98px; }
+      .head { animation-delay: .06s; }
+      .tail { animation-delay: .12s; }
+      @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+      @keyframes step1 { 0%,100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-5px) rotate(-12deg); } 50% { transform: translateY(0) rotate(0deg); } 75% { transform: translateY(-2px) rotate(6deg); } }
+      @keyframes step2 { 0%,100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-2px) rotate(6deg); } 50% { transform: translateY(0) rotate(0deg); } 75% { transform: translateY(-5px) rotate(-12deg); } }
+    </style>
+  </defs>
+  <g>
+    <ellipse class="fur sheep-fur" cx="80" cy="60" rx="52" ry="30" />
+    <circle class="fur sheep-fur" cx="48" cy="52" r="18" />
+    <circle class="fur sheep-fur" cx="92" cy="44" r="20" />
+    <circle class="fur sheep-fur" cx="116" cy="56" r="16" />
+    <ellipse class="body sheep-body" cx="80" cy="70" rx="48" ry="28" />
+    <path class="tail sheep-tail" d="M34 58 q-12 10 -6 18" />
+    <g class="head sheep-head">
+      <ellipse cx="120" cy="60" rx="22" ry="20" />
+      <path class="ear" d="M104 50 q-10 -8 -18 2" />
+      <path class="ear" d="M126 52 q12 -6 16 4" />
+      <circle class="eye" cx="112" cy="54" r="3.5" />
+      <circle class="eye" cx="124" cy="54" r="3.5" />
+      <path d="M112 68 q10 8 16 0" fill="none" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g class="leg1">
+      <path class="leg" d="M55 90 q5 18 14 18" />
+    </g>
+    <g class="leg2">
+      <path class="leg" d="M75 92 q5 16 14 16" />
+    </g>
+    <g class="leg3">
+      <path class="leg" d="M95 94 q5 18 14 18" />
+    </g>
+    <g class="leg4">
+      <path class="leg" d="M115 96 q5 16 14 16" />
+    </g>
   </g>
 </svg>
