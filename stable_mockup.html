@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GameDomba — Kandang</title>
+  <link rel="stylesheet" href="shop_style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Kandang</h1>
+      <div class="hud"><div class="credit">Credits: <span id="credits">100</span></div></div>
+    </header>
+    <main>
+      <section class="screen active">
+        <h2>SiBulu (Level 2)</h2>
+        <div class="stable-grid">
+          <div class="card">
+            <h4>Status</h4>
+            <p>Stamina: <span id="stamina">72</span></p>
+            <p>Strength: <span id="strength">12</span></p>
+            <p>Speed: <span id="speed">11</span></p>
+          </div>
+          <div class="card">
+            <h4>Aksi</h4>
+            <button id="feedBtn">Beri Pakan Biasa</button>
+            <button id="trainBtn">Latihan</button>
+            <button id="restBtn">Istirahat</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <nav>
+        <a href="shop_mockup.html"><button>Toko</button></a>
+        <a href="compete_mockup.html"><button>Adu</button></a>
+      </nav>
+    </footer>
+  </div>
+  <script>
+    let stamina = 72;
+    document.getElementById('stamina').textContent = stamina;
+    document.getElementById('feedBtn').addEventListener('click', ()=>{stamina = Math.min(100, stamina+15); document.getElementById('stamina').textContent = stamina});
+    document.getElementById('trainBtn').addEventListener('click', ()=>{if(stamina>=10){stamina-=10; document.getElementById('stamina').textContent = stamina; alert('Latihan selesai: +XP & +Strength')}});
+  </script>
+</body>
+</html>
